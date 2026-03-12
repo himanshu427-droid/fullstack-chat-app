@@ -112,237 +112,27 @@ flowchart TD
 ## API Endpoints
 
 ### User Registration
-
 #### POST /api/user
 
-```api
-{
-    "title": "User Registration",
-    "description": "Register a new user.",
-    "method": "POST",
-    "baseUrl": "http://localhost:5000",
-    "endpoint": "/api/user",
-    "headers": [
-        {
-            "key": "Content-Type",
-            "value": "application/json",
-            "required": true
-        }
-    ],
-    "bodyType": "json",
-    "requestBody": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}",
-    "responses": {
-        "201": {
-            "description": "User registered successfully",
-            "body": "{\n  \"_id\": \"userId\",\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"token\": \"jwt-token\"\n}"
-        },
-        "400": {
-            "description": "User already exists or invalid input",
-            "body": "{\n  \"message\": \"User already exists\" \n}"
-        }
-    }
-}
-```
-
 ### User Login
-
 #### POST /api/user/login
 
-```api
-{
-    "title": "User Login",
-    "description": "Authenticate a user and return a JWT token.",
-    "method": "POST",
-    "baseUrl": "http://localhost:5000",
-    "endpoint": "/api/user/login",
-    "headers": [
-        {
-            "key": "Content-Type",
-            "value": "application/json",
-            "required": true
-        }
-    ],
-    "bodyType": "json",
-    "requestBody": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}",
-    "responses": {
-        "200": {
-            "description": "User authenticated successfully",
-            "body": "{\n  \"_id\": \"userId\",\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"token\": \"jwt-token\"\n}"
-        },
-        "401": {
-            "description": "Invalid credentials",
-            "body": "{\n  \"message\": \"Invalid email or password\" \n}"
-        }
-    }
-}
-```
-
 ### Get All Users
-
 #### GET /api/user?search=query
 
-```api
-{
-    "title": "Get All Users",
-    "description": "Retrieve all users matching a search query.",
-    "method": "GET",
-    "baseUrl": "http://localhost:5000",
-    "endpoint": "/api/user",
-    "headers": [
-        {
-            "key": "Authorization",
-            "value": "Bearer <token>",
-            "required": true
-        }
-    ],
-    "queryParams": [
-        {
-            "key": "search",
-            "value": "Search string for user name or email",
-            "required": false
-        }
-    ],
-    "bodyType": "none",
-    "responses": {
-        "200": {
-            "description": "A list of users",
-            "body": "[\n  {\n    \"_id\": \"userId\",\n    \"name\": \"Jane Smith\",\n    \"email\": \"jane@example.com\"\n  }\n]"
-        }
-    }
-}
-```
-
 ### Create Chat
-
 #### POST /api/chat
 
-```api
-{
-    "title": "Create Chat",
-    "description": "Create a new chat (one-on-one or group).",
-    "method": "POST",
-    "baseUrl": "http://localhost:5000",
-    "endpoint": "/api/chat",
-    "headers": [
-        {
-            "key": "Authorization",
-            "value": "Bearer <token>",
-            "required": true
-        },
-        {
-            "key": "Content-Type",
-            "value": "application/json",
-            "required": true
-        }
-    ],
-    "bodyType": "json",
-    "requestBody": "{\n  \"userId\": \"otherUserId\"\n}",
-    "responses": {
-        "200": {
-            "description": "Chat created or accessed successfully",
-            "body": "{\n  \"_id\": \"chatId\",\n  \"users\": [\n    {...}, {...}\n  ],\n  \"isGroupChat\": false\n}"
-        }
-    }
-}
-```
-
 ### Fetch User Chats
-
 #### GET /api/chat
 
-```api
-{
-    "title": "Fetch User Chats",
-    "description": "Retrieve all chats for the authenticated user.",
-    "method": "GET",
-    "baseUrl": "http://localhost:5000",
-    "endpoint": "/api/chat",
-    "headers": [
-        {
-            "key": "Authorization",
-            "value": "Bearer <token>",
-            "required": true
-        }
-    ],
-    "bodyType": "none",
-    "responses": {
-        "200": {
-            "description": "List of chats",
-            "body": "[\n  {\n    \"_id\": \"chatId\",\n    \"users\": [...],\n    \"isGroupChat\": false\n  }\n]"
-        }
-    }
-}
-```
-
 ### Send a Message
-
 #### POST /api/message
 
-```api
-{
-    "title": "Send a Message",
-    "description": "Send a message in a chat.",
-    "method": "POST",
-    "baseUrl": "http://localhost:5000",
-    "endpoint": "/api/message",
-    "headers": [
-        {
-            "key": "Authorization",
-            "value": "Bearer <token>",
-            "required": true
-        },
-        {
-            "key": "Content-Type",
-            "value": "application/json",
-            "required": true
-        }
-    ],
-    "bodyType": "json",
-    "requestBody": "{\n  \"content\": \"Hello!\",\n  \"chatId\": \"chatId\"\n}",
-    "responses": {
-        "201": {
-            "description": "Message sent successfully",
-            "body": "{\n  \"_id\": \"messageId\",\n  \"content\": \"Hello!\",\n  \"chat\": \"chatId\",\n  \"sender\": {...}\n}"
-        }
-    }
-}
-```
-
 ### Fetch Chat Messages
-
 #### GET /api/message/:chatId
 
-```api
-{
-    "title": "Fetch Chat Messages",
-    "description": "Get all messages from a specific chat.",
-    "method": "GET",
-    "baseUrl": "http://localhost:5000",
-    "endpoint": "/api/message/:chatId",
-    "headers": [
-        {
-            "key": "Authorization",
-            "value": "Bearer <token>",
-            "required": true
-        }
-    ],
-    "pathParams": [
-        {
-            "key": "chatId",
-            "value": "ID of the chat",
-            "required": true
-        }
-    ],
-    "bodyType": "none",
-    "responses": {
-        "200": {
-            "description": "List of messages",
-            "body": "[\n  {\n    \"_id\": \"messageId\",\n    \"content\": \"Hello!\",\n    \"chat\": \"chatId\",\n    \"sender\": {...}\n  }\n]"
-        }
-    }
-}
-```
+
 
 ---
 
-This README provides a comprehensive overview of the Fullstack Chat App, including installation, usage, architecture, and detailed API documentation. For more details, review the repository's code and comments.
