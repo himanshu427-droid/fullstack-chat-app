@@ -74,7 +74,6 @@ The frontend will typically run on `http://localhost:3000` and the backend on `h
 ## Usage
 
 - Register a new account or log in with existing credentials.
-- Start new chats by searching for users.
 - Send and receive messages in real time.
 - Manage your profile and view chat histories.
 
