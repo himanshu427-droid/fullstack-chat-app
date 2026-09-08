@@ -107,16 +107,6 @@ flowchart TD
     WS --> DB
 ```
 
-## API Endpoints
-
-| Method | Endpoint |
-|------|---------|
-| POST | /api/user |
-| POST | /api/user/login |
-| POST | /api/chat |
-| GET | /api/chat |
-| POST | /api/message |
-| GET | /api/message/:chatId |
 
 
 
